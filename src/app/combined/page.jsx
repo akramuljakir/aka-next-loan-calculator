@@ -32,7 +32,7 @@ const calculateAmortization = (loan) => {
     return amortizationSchedule;
 };
 
-const AllLoansPage = () => {
+const combined = () => {
     const [loans, setLoans] = useState([]);
     const [combinedSchedule, setCombinedSchedule] = useState([]);
 
@@ -45,8 +45,21 @@ const AllLoansPage = () => {
             return acc.concat(calculateAmortization(loan));
         }, []);
 
+        // Sort by date
+        allSchedules.sort((a, b) => new Date(a.date) - new Date(b.date));
+
         setCombinedSchedule(allSchedules);
     }, []);
+
+    const getMonthClass = (date) => {
+        const month = new Date(date).getMonth();
+        const colors = [
+            'bg-red-100', 'bg-orange-100', 'bg-yellow-100', 'bg-green-100',
+            'bg-teal-100', 'bg-blue-100', 'bg-indigo-100', 'bg-purple-100',
+            'bg-pink-100', 'bg-gray-100', 'bg-red-200', 'bg-orange-200'
+        ];
+        return colors[month % colors.length];
+    };
 
     if (combinedSchedule.length === 0) {
         return <div>Loading...</div>;
@@ -69,7 +82,7 @@ const AllLoansPage = () => {
                     </thead>
                     <tbody>
                         {combinedSchedule.map((payment, index) => (
-                            <tr key={index}>
+                            <tr key={index} className={getMonthClass(payment.date)}>
                                 <td className="px-4 py-2 border-b">{payment.loanName}</td>
                                 <td className="px-4 py-2 border-b">{payment.date}</td>
                                 <td className="px-4 py-2 border-b">{payment.amount}</td>
@@ -85,4 +98,4 @@ const AllLoansPage = () => {
     );
 };
 
-export default AllLoansPage;
+export default combined;
