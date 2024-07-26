@@ -63,7 +63,7 @@ const Amortization = ({ loan }) => {
             <table className="min-w-full bg-white border border-gray-200">
                 <thead>
                     <tr>
-                        <th className="px-4 py-2 border-b">Installment No</th>
+                        <th className="px-4 py-2 border-b w-10">Installment No</th>
                         <th className="px-4 py-2 border-b">Date</th>
                         <th className="px-4 py-2 border-b">Amount</th>
                         <th className="px-4 py-2 border-b">Interest</th>
