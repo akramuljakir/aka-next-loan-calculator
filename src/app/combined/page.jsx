@@ -34,7 +34,7 @@ const calculateAmortization = (loan) => {
 
 const CombinedAmortizationPage = () => {
     const [loans, setLoans] = useState([]);
-    const [combinedSchedule, setCombinedSchedule] = useState([]);
+    const [amortizationSchedule, setAmortizationSchedule] = useState([]);
 
     useEffect(() => {
         const savedLoans = JSON.parse(localStorage.getItem('loans')) || [];
@@ -50,26 +50,7 @@ const CombinedAmortizationPage = () => {
         // Sort by date
         allSchedules.sort((a, b) => new Date(a.date) - new Date(b.date));
 
-        // Calculate combined balance
-        const combinedSchedule = [];
-        const balanceTracker = {};
-
-        allSchedules.forEach((payment, index) => {
-            let combinedBalance = parseFloat(payment.balance);
-
-            for (let i = 0; i < index; i++) {
-                if (allSchedules[i].loanName !== payment.loanName) {
-                    combinedBalance += parseFloat(allSchedules[i].balance);
-                }
-            }
-
-            combinedSchedule.push({
-                ...payment,
-                combinedBalance: combinedBalance.toFixed(2)
-            });
-        });
-
-        setCombinedSchedule(combinedSchedule);
+        setAmortizationSchedule(allSchedules);
     }, []);
 
     const getMonthClass = (date) => {
@@ -82,7 +63,7 @@ const CombinedAmortizationPage = () => {
         return colors[month % colors.length];
     };
 
-    if (combinedSchedule.length === 0) {
+    if (amortizationSchedule.length === 0) {
         return <div>Loading...</div>;
     }
 
@@ -100,11 +81,10 @@ const CombinedAmortizationPage = () => {
                             <th className="px-4 py-2 border-b">Interest</th>
                             <th className="px-4 py-2 border-b">EMI to Pay</th>
                             <th className="px-4 py-2 border-b">Balance</th>
-                            <th className="px-4 py-2 border-b">Combined Balance</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {combinedSchedule.map((payment, index) => (
+                        {amortizationSchedule.map((payment, index) => (
                             <tr key={index} className={getMonthClass(payment.date)}>
                                 <td className="px-4 py-2 border-b">{index + 1}</td>
                                 <td className="px-4 py-2 border-b">{payment.loanName}</td>
@@ -113,7 +93,6 @@ const CombinedAmortizationPage = () => {
                                 <td className="px-4 py-2 border-b">{payment.interest}</td>
                                 <td className="px-4 py-2 border-b">{payment.emiToPay}</td>
                                 <td className="px-4 py-2 border-b">{payment.balance}</td>
-                                <td className="px-4 py-2 border-b">{payment.combinedBalance}</td>
                             </tr>
                         ))}
                     </tbody>
