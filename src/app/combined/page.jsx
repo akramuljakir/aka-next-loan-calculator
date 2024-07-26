@@ -24,9 +24,10 @@ const calculateAmortization = (loan) => {
             balance: remainingBalance.toFixed(2),
             loanName: loan.loanName
         });
-
         currentDate.setMonth(currentDate.getMonth() + 1);
     }
+    console.log("parameter in calculateAmortization", loan);
+    console.log("output of amortizationSchedule", amortizationSchedule);
 
     return amortizationSchedule;
 };
@@ -38,12 +39,14 @@ const CombinedAmortizationPage = () => {
     useEffect(() => {
         const savedLoans = JSON.parse(localStorage.getItem('loans')) || [];
         setLoans(savedLoans);
+        console.log("savedLoans", savedLoans);
 
         // Combine amortization schedules of all loans
         const allSchedules = savedLoans.reduce((acc, loan) => {
             return acc.concat(calculateAmortization(loan));
         }, []);
 
+        console.log("all loan in single array", allSchedules);
         // Sort by date
         allSchedules.sort((a, b) => new Date(a.date) - new Date(b.date));
 
