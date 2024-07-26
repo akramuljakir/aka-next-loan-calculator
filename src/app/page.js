@@ -77,7 +77,7 @@ const Home = () => {
               {loans.map((loan, index) => (
                 <tr key={index}>
                   <td className="border px-4 py-2">
-                    <Link href={`/loan/${index}`}>
+                    <Link href={`/loans/${index}`}>
                       {loan.loanName}
                     </Link>
                   </td>

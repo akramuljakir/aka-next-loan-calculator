@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 
-const AllLoansPage = () => {
+const LoansPage = () => {
     const [loans, setLoans] = useState([]);
 
     useEffect(() => {
@@ -39,7 +39,7 @@ const AllLoansPage = () => {
                                 <td className="px-4 py-2 border-b">{loan.emiAmount}</td>
                                 <td className="px-4 py-2 border-b">{loan.loanStartDate}</td>
                                 <td className="px-4 py-2 border-b">
-                                    <Link href={`/loan/${index}`} className="text-blue-500 hover:underline">
+                                    <Link href={`/loans/${index}`} className="text-blue-500 hover:underline">
                                         View Details
                                     </Link>
                                 </td>
@@ -52,4 +52,4 @@ const AllLoansPage = () => {
     );
 };
 
-export default AllLoansPage;
+export default LoansPage;
