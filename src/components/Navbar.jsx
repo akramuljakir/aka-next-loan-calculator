@@ -24,13 +24,13 @@ const links = [
 
 const Navbar = () => {
   return (
-    <div className='container'>
-      <Link href="/" className='logo'>
+    <div className='h-[100px] flex justify-around items-center'>
+      <Link href="/" className='font-bold text-[22px]'>
         Akramul Jakir
       </Link>
-      <div className='links'>
+      <div className='flex items-center gap-[20px]'>
         {links.map((link) => (
-          <Link key={link.id} href={link.url} className='link'>
+          <Link key={link.id} href={link.url} className='flex items-center gap-[20px]'>
             {link.title}
           </Link>
         ))}

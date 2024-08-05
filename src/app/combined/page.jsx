@@ -133,8 +133,8 @@ const CombinedAmortizationPage = () => {
     const sortedData = sortByDate(data)
 
     return (
-        <div className="container mx-auto p-4">
-            <h1 className="text-2xl font-bold mb-4">All Loans Amortization Schedule</h1>
+        <div className="container mx-auto p-4 ">
+            <h1 className="text-2xl font-bold mb-4 w-full">All Loans Amortization Schedule</h1>
             <div className="overflow-x-auto">
                 <table className="min-w-full bg-white border border-gray-200">
                     <thead>
